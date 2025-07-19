@@ -1,15 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fastapi-service
-  labels:
-    app: fastapi-service
+  name: node-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer   # ← this must be present!
   selector:
-    app: fastapi-service
+    app: nodejs
   ports:
     - protocol: TCP
-      port: 8000        # Port exposed within the cluster
-      targetPort: 8000  # Port exposed by the FastAPI container
+      port: 3000
+      targetPort: 3000
+
 
