@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fastapi-deployment
+  name: node-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fastapi-service
+      app: node-service
   template:
     metadata:
       labels:
-        app: fastapi-service
+        app: node-service
     spec:
       containers:
-        - name: fastapi-container
-          image: yourdockerhubusername/fastapi-image:latest  # replace with your image
-          ports:
-            - containerPort: 8000
+      - name: node-service
+        image: 202403775442.dkr.ecr.ap-south-1.amazonaws.com/node-service:latest
+        ports:
+        - containerPort: 3000
 
