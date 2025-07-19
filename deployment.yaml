@@ -1,21 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-service
+  name: fastapi-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: node-service
+      app: fastapi-service
   template:
     metadata:
       labels:
-        app: node-service
+        app: fastapi-service
     spec:
-      containers:
-      - name: node-service
-        image: 202403775442.dkr.ecr.ap-south-1.amazonaws.com/node-service:latest
-        ports:
-        - containerPort: 3000
       imagePullSecrets:
-      - name: ecr-secret 
+        - name: ecr-secret
+      containers:
+      - name: fastapi-service
+        image: 202403775442.dkr.ecr.ap-south-1.amazonaws.com/fastapi-service:latest
+        ports:
+        - containerPort: 8000
+
