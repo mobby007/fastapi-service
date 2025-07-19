@@ -3,12 +3,13 @@ kind: Service
 metadata:
   name: node-service
 spec:
-  type: LoadBalancer   # ← this must be present!
+  type: LoadBalancer   # 🔁 This is the key change
   selector:
-    app: nodejs
+    app: node-service
   ports:
     - protocol: TCP
       port: 3000
       targetPort: 3000
+
 
 
