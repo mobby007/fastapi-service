@@ -1,13 +1,24 @@
-apiVersion: v1
-kind: Service
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: fastapi-service
+  name: microservices-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
-  selector:
-    app: fastapi
-  ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000
-  type: ClusterIP
-
+  rules:
+  - http:
+      paths:
+      - path: /node(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: node-service
+            port:
+              number: 3000
+      - path: /api(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: fastapi-service
+            port:
+              number: 8000
