@@ -1,24 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fastapi
+  name: fastapi-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fastapi
+      app: fastapi-service
   template:
     metadata:
       labels:
-        app: fastapi
+        app: fastapi-service
     spec:
       imagePullSecrets:
         - name: ecr-secret
       containers:
-        - name: fastapi
+        - name: fastapi-service
           image: 202403775442.dkr.ecr.ap-south-1.amazonaws.com/fastapi-service:latest
           ports:
             - containerPort: 8000
-
-
-
