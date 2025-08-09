@@ -5,8 +5,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: fastapi-service  # must match your fastapi deployment label
+    app: fastapi
   ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000
+    - port: 80
+      targetPort: 8000  # container port
