@@ -8,4 +8,4 @@ spec:
     app: fastapi
   ports:
     - port: 80
-      targetPort: 8000  # container port
+      targetPort: 8000   # Change this to whatever port FastAPI is listening on in your container
