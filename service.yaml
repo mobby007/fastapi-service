@@ -2,10 +2,33 @@ apiVersion: v1
 kind: Service
 metadata:
   name: fastapi-service
+  namespace: default
 spec:
   type: ClusterIP
   selector:
     app: fastapi
   ports:
-    - port: 80
-      targetPort: 8000   # Change this to whatever port FastAPI is listening on in your container
+    - protocol: TCP
+      port: 80         # Port ALB will connect to
+      targetPort: 8000 # Your FastAPI container's port
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-deployment
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+        - name: fastapi
+          image: mobby007/fastapi-service:latest # Replace with your image if different
+          ports:
+            - containerPort: 8000
